@@ -1,0 +1,8 @@
+#exampleimages div{
+    background-size: cover;
+    background-position: center;
+}
+
+#exampleimages{
+    gap: 10px;
+}
