@@ -32,22 +32,32 @@ function gotResult(error, results) {
   }
   
   var trace1 = {
-    x: [results[0]["label"], results[1]["label"],results[2]["label"]],
-    y: [results[0]["confidence"], results[1]["confidence"],results[2]["confidence"]],
+    x: [results[0]["confidence"], results[1]["confidence"], results[2]["confidence"]],
+    y: [results[0]["label"], results[1]["label"], results[2]["label"]],
+    orientation: 'h',
+    marker: {
+      color: 'rgba(55,128,191,0.6)',
+      width: 1
+    },
     type: 'bar'
   };
   
   var trace2 = {
-    x: [results[0]["label"], results[1]["label"],results[2]["label"]],
-    y: [1-results[0]["confidence"], 1-results[1]["confidence"],1-results[2]["confidence"]],
-    type: 'bar'
+    x: [1-results[0]["confidence"], 1-results[1]["confidence"], 1-results[2]["confidence"]],
+    y: [results[0]["label"], results[1]["label"], results[2]["label"]],
+    orientation: 'h',
+    type: 'bar',
+    marker: {
+      color: 'rgba(255,153,51,0.6)',
+      width: 1
+    }
   };
 
     var layout = {
         barmode: 'stack',
         showlegend: false,
         height: 400,
-        width: 400,
+        width: 700,
       };
 
     var data = [trace1, trace2];
