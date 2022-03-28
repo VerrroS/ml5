@@ -12,5 +12,4 @@ jobs:
         host: ${{ secrets.FTP_SERVER }}
         user: ${{ secrets.FTP_HOST }}
         password: ${{ secrets.FTP_PW }}
-        localDir: "dist"
         remoteDir: "web/ml5"
