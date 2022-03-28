@@ -9,9 +9,13 @@ jobs:
     - name: ftp-upload-action
       uses: GenieTim/ftp-action@v4.0.1
 
-      
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
-        host: ${{ secrets.FTP_SERVER }}
-        user: ${{ secrets.FTP_HOST }}
-        password: ${{ secrets.FTP_PW }}
-        remoteDir: "web/ml5"
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_HOST }}
+        password:  ${{ secrets.FTP_PW }}
+        server-dir: "web/ml5/"
