@@ -14,4 +14,4 @@ jobs:
         server: ftp.veronikasimmering.de
         username: ftp200005364
         password: ${{ secrets.FTP_pw }}
-        localDir: "web/ml5"
+        remoteDir: "web/ml5"
