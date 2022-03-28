@@ -54,7 +54,7 @@ function gotResult(error, results) {
       };
 
     var data = [trace1, trace2];
-    Plotly.newPlot('pie', data, layout);
+    Plotly.newPlot('plot', data, layout);
 }
 
 function createExamples(){
@@ -72,44 +72,48 @@ function createExamples(){
 
 
 function changeImage(url){
-    img = loadImage(url, () => classifier.classify(img, gotResult));
+    startLoader();
+    img = loadImage(url, () => endLoader());
     image_active.style.backgroundImage = `url(${url})`;
 }
 
-function upload_image(){
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-      const uploaded_image = reader.result;
-      changeImage(uploaded_image);
- });
-    reader.readAsDataURL(this.files[0]);
+function startLoader(){
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("plot").style.display = "none";
+}
+
+function endLoader(){
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("plot").style.display = "block";
+    classifier.classify(img, gotResult);
 }
 
 createExamples();
 
-inmage_input.addEventListener("change", upload_image);
-image_active.addEventListener("dragover", function(ev) {ev.preventDefault()});
-image_active.addEventListener("drop", function(ev) {ev.preventDefault(), upload_image});
+inmage_input.addEventListener("change", uploadFile, false);
+image_active.addEventListener("dragover", function(ev) {ev.preventDefault(), this.classList.add('highlight')});
+image_active.addEventListener("dragleave", function(ev) {ev.preventDefault(), this.classList.remove('highlight')});
+image_active.addEventListener("drop", handleDrop);
 
- function dropHandler(ev) {
-    console.log('File(s) dropped');
-  
-    // Prevent default behavior (Prevent file from being opened)
-    ev.preventDefault();
-  
-    if (ev.dataTransfer.items) {
-      // Use DataTransferItemList interface to access the file(s)
-      for (var i = 0; i < ev.dataTransfer.items.length; i++) {
-        // If dropped items aren't files, reject them
-        if (ev.dataTransfer.items[i].kind === 'file') {
-          var file = ev.dataTransfer.items[i].getAsFile();
-          console.log('... file[' + i + '].name = ' + file.name);
-        }
-      }
-    } else {
-      // Use DataTransfer interface to access the file(s)
-      for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-        upload_image(ev);
-      }
-    }
+function handleDrop(e) {
+  this.classList.remove('highlight');
+  e.preventDefault();
+  let dt = e.dataTransfer;
+  let files = dt.files;
+  console.log(files);
+  uploadFile(files[0], true);
+}
+
+
+function uploadFile(file, drop) {
+  let reader = new FileReader()
+  if (drop){
+    reader.readAsDataURL(file);
+  }
+  reader.addEventListener("load", () => {
+    const uploaded_image = reader.result;
+    console.log(uploaded_image);
+    changeImage(uploaded_image);
+  });
+  reader.readAsDataURL(this.files[0]);
   }

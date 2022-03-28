@@ -12,7 +12,11 @@
 }
 
 #image_active{
-    width: 800px;
+    width: 100%;
     height: 600px;
     background-color: grey;
+}
+
+.highlight {
+    border: solid 2px #ff0000;
 }
