@@ -24,36 +24,28 @@ function gotResult(error, results) {
     //createDiv(`Confidence: ${nf(results[0].confidence, 0, 2)}`);
   }
   
-  var trace1 = {
-    x: [results[2]["confidence"], results[1]["confidence"], results[0]["confidence"]],
-    y: [results[2]["label"], results[1]["label"], results[0]["label"]],
-    orientation: 'h',
-    marker: {
-      color: 'rgba(55,128,191,0.6)',
-      width: 1
-    },
-    type: 'bar'
-  };
-  
-  var trace2 = {
-    x: [1-results[2]["confidence"], 1-results[1]["confidence"], 1-results[0]["confidence"]],
-    y: [results[2]["label"], results[1]["label"], results[0]["label"]],
-    orientation: 'h',
-    type: 'bar',
-    marker: {
-      color: 'rgba(255,153,51,0.6)',
-      width: 1
-    }
-  };
 
-    var layout = {
-        barmode: 'stack',
-        showlegend: false,
-        height: 400,
-        width: 400,
-      };
+      var data = [{
+        x: [results[2]["confidence"], results[1]["confidence"], results[0]["confidence"]],
+        y: [results[2]["label"], results[1]["label"], results[0]["label"]],
+        name: 'Classification',
+        type: 'bar',
+        hoverinfo: 'x+text',
+        hovertext: '% Confidence',
+        orientation: 'h'
+      }]
 
-    var data = [trace1, trace2];
+var layout = {
+       xaxis: {title: 'Confidence'},
+       xaxis: { 
+         range: [0, 1], 
+         fixedrange: true
+        },
+       yaxis: {
+         automargin: true,
+       },
+      }
+
     Plotly.newPlot('plot', data, layout);
 }
 
@@ -73,6 +65,8 @@ function createExamples(){
 
 function changeImage(url){
     startLoader();
+    // hide Image icon
+    document.getElementById("img_icon").style.display = "none";
     img = loadImage(url, () => endLoader());
     image_active.style.backgroundImage = `url(${url})`;
 }
