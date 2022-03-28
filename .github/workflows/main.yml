@@ -11,6 +11,6 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
-        server: ftp.veronikasimmering.de/ml5/
+        server: ftp.veronikasimmering.de/ml5
         username: ftp200005364
         password: ${{ secrets.FTP_pw }}
