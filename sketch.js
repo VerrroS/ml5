@@ -10,36 +10,37 @@ classifier = ml5.imageClassifier('MobileNet');
 const image_active = document.getElementById('image_active');
 const inmage_input = document.getElementById('image_input');
 
-function setup(){}
+function setup(){
+  noCanvas();
+}
 
 // A function to run when we get any errors and the results
 function gotResult(error, results) {
   // Display error in the console
   if (error) {
     console.error(error);
-  } else {
-    // The results are in an array ordered by confidence.
-    console.log(results);
-    //createDiv(`Label: ${results[0].label}`);
-    //createDiv(`Confidence: ${nf(results[0].confidence, 0, 2)}`);
   }
   
+results.forEach(element => {
+  element["confidence"] = element["confidence"] * 100;
+});
 
       var data = [{
         x: [results[2]["confidence"], results[1]["confidence"], results[0]["confidence"]],
         y: [results[2]["label"], results[1]["label"], results[0]["label"]],
         name: 'Classification',
         type: 'bar',
-        hoverinfo: 'x+text',
-        hovertext: '% Confidence',
+        hoverinfo: 'x',
         orientation: 'h'
       }]
 
 var layout = {
        xaxis: {title: 'Confidence'},
        xaxis: { 
-         range: [0, 1], 
-         fixedrange: true
+         range: [0, 100], 
+         fixedrange: true,
+         hoverformat: '.2f',
+         title: 'Confidence (%)'
         },
        yaxis: {
          automargin: true,
@@ -106,8 +107,12 @@ function uploadFile(file, drop) {
   }
   reader.addEventListener("load", () => {
     const uploaded_image = reader.result;
-    console.log(uploaded_image);
+    //detect if file is an image, if not show error
+    if (uploaded_image.startsWith("data:image")){
     changeImage(uploaded_image);
+    } else {
+      alert("Please upload an image");
+    }
   });
   reader.readAsDataURL(this.files[0]);
   }
