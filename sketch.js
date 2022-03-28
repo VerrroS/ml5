@@ -22,39 +22,17 @@ function gotResult(error, results) {
   }
   
 results.forEach(element => {
-  element["confidence"] = element["confidence"] * 100;
+  percent = element["confidence"] * 100;
+  createBarCart(percent, element["label"]);
 });
 
-      var data = [{
-        x: [results[2]["confidence"], results[1]["confidence"], results[0]["confidence"]],
-        y: [results[2]["label"], results[1]["label"], results[0]["label"]],
-        name: 'Classification',
-        type: 'bar',
-        hoverinfo: 'x',
-        orientation: 'h'
-      }]
-
-var layout = {
-       xaxis: {title: 'Confidence'},
-       xaxis: { 
-         range: [0, 100], 
-         fixedrange: true,
-         hoverformat: '.2f',
-         title: 'Confidence (%)'
-        },
-       yaxis: {
-         automargin: true,
-       },
-      }
-
-    Plotly.newPlot('plot', data, layout);
 }
+
 
 function createExamples(){
     for (var i = 0; i < exampleimages.length; i++) {
         var newimage = document.createElement("div");
         newimage.style.height = '200';
-        newimage.style.width = '200';
         newimage.setAttribute('data-id', i);
         newimage.style.backgroundImage = `url(${exampleimages[i]})`;
         document.getElementById("exampleimages").appendChild(newimage);
@@ -63,6 +41,38 @@ function createExamples(){
     }
 }
 
+function createBarCart(percent, lable_txt){
+    //remove all previous bars if thex exist
+    let bars = document.getElementsByClassName("bar");
+    while (bars.length >= 3) {
+        bars[0].parentNode.removeChild(bars[0]);
+    }
+    // remove all previous labels if the exist
+    let labels = document.getElementsByClassName("label");
+    while (labels.length >= 5) {
+        labels[0].parentNode.removeChild(labels[0]);
+    }
+    var newdiv = document.createElement("div");
+    newdiv.className = "bar";
+    var newNum = document.createElement("p");
+    newNum.className = "label";
+    newNum.innerHTML = percent.toFixed(2) + "% Confidence";
+    newNum.style.left = `${percent}%`;
+    if (percent < 50){
+      newNum.style.marginLeft = "80px"
+    }
+    newdiv.appendChild(newNum);
+    //create labels
+    var lable = document.createElement("p");
+    lable.innerHTML = lable_txt;
+    lable.classList.add("label");
+    document.getElementById("plot").appendChild(lable);
+    //create new bar
+    var newPercentage = document.createElement("div");
+    newPercentage.style.width = `${percent}%`;
+    newdiv.appendChild(newPercentage);
+    document.getElementById("plot").appendChild(newdiv);
+}
 
 function changeImage(url){
     startLoader();
