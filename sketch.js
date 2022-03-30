@@ -27,11 +27,11 @@ function gotResult(error, results) {
 });
 }
 
+
 function createExamples(){
     for (var i = 0; i < exampleimages.length; i++) {
         var newimage = document.createElement("div");
         newimage.style.height = '200';
-        newimage.style.width = '200';
         newimage.setAttribute('data-id', i);
         newimage.style.backgroundImage = `url(${exampleimages[i]})`;
         document.getElementById("exampleimages").appendChild(newimage);
@@ -40,6 +40,38 @@ function createExamples(){
     }
 }
 
+function createBarCart(percent, lable_txt){
+    //remove all previous bars if thex exist
+    let bars = document.getElementsByClassName("bar");
+    while (bars.length >= 3) {
+        bars[0].parentNode.removeChild(bars[0]);
+    }
+    // remove all previous labels if the exist
+    let labels = document.getElementsByClassName("label");
+    while (labels.length >= 5) {
+        labels[0].parentNode.removeChild(labels[0]);
+    }
+    var newdiv = document.createElement("div");
+    newdiv.className = "bar";
+    var newNum = document.createElement("p");
+    newNum.className = "label";
+    newNum.innerHTML = percent.toFixed(2) + "% Confidence";
+    newNum.style.left = `${percent}%`;
+    if (percent < 50){
+      newNum.style.marginLeft = "80px"
+    }
+    newdiv.appendChild(newNum);
+    //create labels
+    var lable = document.createElement("p");
+    lable.innerHTML = lable_txt;
+    lable.classList.add("label");
+    document.getElementById("plot").appendChild(lable);
+    //create new bar
+    var newPercentage = document.createElement("div");
+    newPercentage.style.width = `${percent}%`;
+    newdiv.appendChild(newPercentage);
+    document.getElementById("plot").appendChild(newdiv);
+}
 
 function createBarCart(percent, lable_txt){
 
