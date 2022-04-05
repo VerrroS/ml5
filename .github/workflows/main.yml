@@ -14,4 +14,4 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_HOST }}
         password:  ${{ secrets.FTP_PW }}
-        server-dir: "web/ml5/"
+        server-dir: "web/ml5.veronikasimmering.de/"
