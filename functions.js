@@ -14,37 +14,40 @@ function removeChildren(node, num){
   }
 
 
-function createHtmlElement(tag, className, text){
-    var element = document.createElement(tag);
-    element.className = className;
-    element.innerHTML = text;
-    return element;
+function cleanUpBars(){
+    let bars = document.getElementsByClassName("bar");
+    let labels = document.getElementsByClassName("label");
+
+    //remove all previous bars if thex exist
+    while (bars.length >= 3) {
+        bars[0].parentNode.removeChild(bars[0]);
+    }
+    // remove all previous labels if the exist
+    while (labels.length >= 5) {
+        labels[0].parentNode.removeChild(labels[0]);
+    }
 }
 
-class HtmlElement {
-    constructor(tag, className) {
-        this.element = document.createElement(tag);
-    }
-    class (className) {
-        this.element.className = className;
-        return this;
-    }
-    appendTo(parent) {
-        parent.appendChild(this.element);
-        return this;
-    }
-    setText(text) {
-        this.element.innerHTML = text;
-        return this;
-    }
-    setStyle(style) {
-        for (var key in style) {
-            this.element.style[key] = style[key];
+function createBar(ischild = false){
+    var newdiv = document.createElement("div");
+    if (ischild){
+        newdiv.style.width = `${percent}%`;
         }
-        return this;
+    else {
+        newdiv.className = "bar";
     }
-    //return DOM object
-    getElement() {
-        return this.element;
+    return newdiv;
+}
+
+function createlable(txt, islableconfidence = false){
+    var lable = document.createElement("p");
+    lable.className = "label";
+    lable.innerHTML = txt;
+    if (islableconfidence){
+        lable.style.left = `${percent}%`;
+        if (percent < 50){
+            lable.style.marginLeft = "80px"
+        }
     }
+    return lable;
 }
