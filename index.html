@@ -12,30 +12,56 @@
 </head>
 
 <body class="container">
-  <h1>Bildklassifikation mit ml5</h1>
-  <main class="row">
-    <div class="col-lg-7">
-      <div id="image_active" >
-        <div  id="img_icon">
-          <span class="iconify" data-icon="bi:image-fill"></span>
-          <p>Drag Image here</p>
-        </div>
-      </div>
-      <input class="mt-2" id="image_input" type='file' accept="image/png, image/jpg"/>
-    </div>
-    <div class="col-lg-5 position-relative">
-      <div id="loader"></div>
-      <div id="plot" class="active">
+    
+
+<h1>Bildklassifikation mit ml5</h1>
+<section class="row">
+  <div class="col-lg-7">
+    <div id="image_active" >
+      <div  id="img_icon">
+        <span class="iconify" data-icon="bi:image-fill"></span>
+        <p>Drag Image here</p>
       </div>
     </div>
-  </main>
-  <h3 class="mt-3">Example Images</h3>
-  <div id="exampleimages">
+    <input class="mt-2" id="image_input" type='file' accept="image/png, image/jpg"/>
   </div>
-  <footer class="mt-3">
-    <a href="documentation.html">Dokumentation</a>
-  </footer>
+  <div class="col-lg-5 position-relative" id="classification">
+    <div id="loader"></div>
+    <div id="plot" class="active">
+      <div class="help-icon" data-key="classifier-helper">
+        <span class="iconify" data-icon="bx:help-circle"></span>
+        <div id="classifier-helper">
+          Hier sehen Sie das Ergebniss der Klassifikation mit dem Deep Learning Modell von Tensorflow. Es derden die drei Erebnisse
+          mit den höchsten Konfidenzwerten angezeigt.
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+<section id ="examples">
+  <h3>
+    Beispielbilder
+    <div class="help-icon" data-key="examples-helper">
+      <span class="iconify" data-icon="bx:help-circle"></span>
+      <div id="examples-helper">
+        Klicken sie auf die Beispielbilder um sie Klassfizieren zu lassen. Auf der rechten Seite können sie die Klassifikation sehen.
+        Die Beispielbilder wurden so gewählt, dass hie Hälfte von ihnen richtig und die andere Häfte falsch von dem Deep Learning Model
+        klassifiziert wurden.
+      </div>
+    </div>
+  </h3>
+  <div id="exampleimages"></div>
+</section>
+
+
 </body>
+
+<footer class="mt-3">
+    <a href="documentation.html">Dokumentation</a>
+    <a href="./">Klass</a>
+</footer>
+
 <script src="functions.js"></script>
-<script src="sketch.js"></script>
+<script src="main.js"></script>
 </html>
