@@ -21,11 +21,10 @@ function gotResult(error, results) {
     console.error(error);
   }
   
-results.forEach(element => {
+  results.forEach(element => {
   percent = element["confidence"] * 100;
   createBarCart(percent, element["label"]);
 });
-
 }
 
 
@@ -74,24 +73,39 @@ function createBarCart(percent, lable_txt){
     document.getElementById("plot").appendChild(newdiv);
 }
 
+function createBarCart(percent, lable_txt){
+
+    const plot = document.getElementById("plot");
+    //remove all previous bars if thex exist
+    let bars = document.getElementsByClassName("bar");
+    removeChildren(bars, 3)
+    // remove all previous labels if the exist
+    let labels = document.getElementsByClassName("label");
+    removeChildren(labels, 5)
+
+    var newdiv = new HtmlElement('div').class('bar').appendTo(plot);
+    text = percent.toFixed(2) + "% Confidence";
+    var newNum = new HtmlElement('div').class('label').setText(text).setStyle({left: `${percent}%` }).appendTo(newdiv.getElement());;
+    if (percent < 50){
+      newNum.setStyle({marginleft: '80px'});
+    }
+    //create labels
+    var lable = new HtmlElement('p').class('label').setText(lable_txt).appendTo(plot);
+    //create new bar
+    var newPercentage = HtmlElement('div').setStyle({width: `${percent}%`}).appendTo(newdiv);
+
+}
+
 function changeImage(url){
-    startLoader();
+  toggleLoader();
     // hide Image icon
     document.getElementById("img_icon").style.display = "none";
-    img = loadImage(url, () => endLoader());
-    image_active.style.backgroundImage = `url(${url})`;
+    img = loadImage(url, () => toggleLoader(true));
+    image_active.style.backgroundImage = `url(${url})`, 
+    () => alert ("Classification failed, please try another image");
 }
 
-function startLoader(){
-    document.getElementById("loader").style.display = "block";
-    document.getElementById("plot").style.display = "none";
-}
 
-function endLoader(){
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("plot").style.display = "block";
-    classifier.classify(img, gotResult);
-}
 
 createExamples();
 
