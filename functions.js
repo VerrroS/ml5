@@ -15,7 +15,7 @@ function removeChildren(node, num){
 
 
 function cleanUpBars(){
-    let bars = document.getElementsByClassName("bar");
+    let bars = document.getElementsByClassName("bar_parent");
     let labels = document.getElementsByClassName("label");
 
     //remove all previous bars if thex exist
@@ -28,13 +28,13 @@ function cleanUpBars(){
     }
 }
 
-function createBar(ischild = false){
+function createBar(isChild = false){
     var newdiv = document.createElement("div");
-    if (ischild){
+    if (isChild){
         newdiv.style.width = `${percent}%`;
         }
     else {
-        newdiv.className = "bar";
+        newdiv.className = "bar_parent";
     }
     return newdiv;
 }
@@ -51,3 +51,14 @@ function createlable(txt, islableconfidence = false){
     }
     return lable;
 }
+
+function loading_sucessful(url){
+    toggleLoader(true);
+    helper_classifier.style.display = "block";
+    image_active.style.backgroundImage = `url(${url})`;
+  }
+  
+  function loading_failed(){
+    toggleLoader(true);
+    alert("Classification failed, please try another image");
+  }
