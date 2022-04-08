@@ -18,8 +18,10 @@
       <div class="help-icon" data-key="classifier-helper">
         <span class="iconify" data-icon="bx:help-circle"></span>
         <div id="classifier-helper">
-          Hier sehen Sie das Ergebniss der Klassifikation mit dem Deep Learning Modell von Tensorflow. Es derden die drei Erebnisse
-          mit den höchsten Konfidenzwerten angezeigt.
+          Hier sehen Sie das Ergebniss der Bildklassifikation mit dem TensorFlow Deep Learning Modell 
+          <a href="https://github.com/tensorflow/tfjs-models/tree/master/mobilenet">TensorFlow.js MobileNetV2</a>.
+          Das Modell trifft Vorhersagen darüber, was auf dem Bild zu sehen ist. Diese Vorhersagen wurden aus einem 
+          Datensatz von 50k Bildern vom Modell erlernt. Es werden die drei Erebnisse mit den höchsten Konfidenzwerten angezeigt.
         </div>
         
       </div>
@@ -33,7 +35,7 @@
       <span class="iconify" data-icon="bx:help-circle"></span>
       <div id="examples-helper">
         Klicken sie auf die Beispielbilder um sie Klassfizieren zu lassen. Auf der rechten Seite können sie die Klassifikation sehen.
-        Die Beispielbilder wurden so gewählt, dass hie Hälfte von ihnen richtig und die andere Häfte falsch von dem Deep Learning Model
+        Die Beispielbilder wurden so gewählt, dass die Hälfte von ihnen richtig und die andere Häfte falsch von dem Deep Learning Model
         klassifiziert wurden.
       </div>
     </div>
@@ -41,6 +43,12 @@
   <div id="exampleimages"></div>
 </section>
 
+<footer class="mt-3">
+  <a href="documentation.html">Dokumentation</a>
+</footer>
+
+
+<script src="classifier.js"></script>
 {% endblock %}
 
 
