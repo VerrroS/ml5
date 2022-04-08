@@ -24,6 +24,14 @@ img {
     position: relative;
 }
 
+pre {
+    background-color: darkslategrey;
+    color: white;
+    padding: 5px;
+    width: fit-content;
+    max-width: 100%;
+}
+
 .highlight {
     border: solid 2px #ff702e;
 }
@@ -51,13 +59,13 @@ img {
     display: none;
 }
 
-.bar {
+.bar_parent {
     height: 40px;
     margin-bottom: 5px;
     background-color: lightgrey;
     position: relative;
 }
-.bar div {
+.bar_parent div {
     height: 100%;
     position: absolute;
     background-color: #ff702e;
@@ -69,13 +77,28 @@ img {
     margin: 0;
 }
 
-.bar {
+#github {
+    font-size: 2.5rem;
+    color: lightslategray;
+    align-self: center;
+}
+
+h1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+#github:hover {
+    color: darkslategray;
+}
+
+.bar_parent {
     height: 40px;
     margin-bottom: 5px;
     background-color: lightgrey;
     position: relative;
 }
-.bar div {
+.bar_parent div {
     height: 100%;
     position: absolute;
     background-color: #ff702e;
@@ -87,7 +110,7 @@ img {
     margin: 0;
 }
 
-.bar .label {
+.bar_parent .label {
     position: absolute;
     z-index: 2;
     transform: translate(-50%, -50%);
@@ -143,6 +166,9 @@ img {
     #plot {
         position: relative;
         margin: 15 0;
+    }
+    #classifier-helper, #examples-helper{
+        width: 200px;
     }
 }
 
