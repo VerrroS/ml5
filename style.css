@@ -10,7 +10,7 @@ img {
     border: solid 2px grey;
 }
 
-.exampleimages div{
+.exampleimages div, #image_active{
     border: 0.5px solid lightgray;
 }
 
@@ -194,6 +194,9 @@ h1 {
 @media screen and (max-width: 600px) {
     #image_active{
         height: 400px;
+    }
+    h1 a{
+        font-size: .75rem;
     }
     
 }
