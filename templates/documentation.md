@@ -6,22 +6,19 @@ F&uuml;r die Umsetzung der Aufgabe habe ich folgende Tools verwendet:
 
 - **[ml5.js](https://ml5js.org/)**
 
-    Ml5.js ist eine High Level API zum TensorFlow Deep Learning Model (TensorFlow.js MobileNetV2)[https://github.com/tensorflow/tfjs-models/tree/master/mobilenet]. Ich habe ml5 genutz um die Kommunikation zum Modell einfach und übersichtlich zu halten.
+    Ml5.js ist eine High Level API zum TensorFlow Deep Learning Model (TensorFlow.js MobileNetV2)[https://github.com/tensorflow/tfjs-models/tree/master/mobilenet]. Ich habe ml5 genutz um die Kommunikation zum Modell einfach und &uuml;bersichtlich zu halten.
 
 - **[Bootstrap](https://getbootstrap.com/)**
 
-    Bootstrap ist eine CSS Library, die es erleichtert Websites responsive zu gestalten. 
+    Bootstrap ist eine CSS Library, die es erleichtert, Websites responsive zu gestalten. 
 
 ## Fachliche Dokumentation
 
 ### **Ansatz**
-Um eine schnelle und leichtgewichtige L&ouml;sung zu erstellen habe ich mich dazu entschieden die Klassifikation auf 
-einer statischen WebPage zu implementieren. Ich nutze dabei kein Framework sondern schreibe nur HTML, CSS und JavaScript.
-
-#### Visualisieren
-
-Da mir der Look und die Handhabung von Frameworks wie Plotly nicht gef&auml;llt und in diesem Falle eine visualisierung der Ergebnisse 
-mit CSS und Javascript einfach m&ouml;glich ist, habe ich mich gegen ein Framework entschieden. Mit Css habe ich die volle 
+Um eine schnelle und leichtgewichtige L&ouml;sung zu erstellen, habe ich mich dazu entschieden, die Klassifikation auf 
+einer statischen Webpage zu implementieren. Ich nutze dabei kein Framework, sondern schreibe nur HTML, CSS und JavaScript.
+Da mir der Look und die Handhabung von Frameworks wie Plotly nicht gef&auml;llt und in diesem Falle eine Visualisierung der Ergebnisse 
+mit CSS und Javascript einfach m&ouml;glich ist, habe ich mich gegen ein Framework entschieden. Mit CSS habe ich die volle 
 Kontrolle &uuml;ber den Look und kann die Seite auch f&uuml;r mobile Ger&auml;te anpassen.
 
 
@@ -47,7 +44,7 @@ Der ml5 classifier wird beim Laden der Seite definiert und dann aufgerufen
         alert("Classifier failed to load, please try again. Error: " + error);
     }
 
-Wenn ein Bild angeclick oder hochgeladen wird, wird die Funktion changeImage() mit dem Parameter url aufgerufen. Die Funktion setzt zuerst das Ladeicon auf der rechten Seite auf aktiv. Falls die Klassifikation länger dauert, bekommt der Nutzende so Feedback, dass der Input angekommen ist. Das anf&auml;ngliche Kamera Icon in der Mitte vom grauen Kasten links wird unsichtbar gestellt, da der Nutzer nun gesehen hat, an welche Stelle er ein Bild per Drag and Drop hineinziehen kann. Dann wird das Bild mit classify klassifiziert und die Ergebnisse werden in einem Promise "results" gespeichert. War das erfolgreich wird die funktion loading_successfull aufgerufen. Diese Funktion ersetzt das Bild links mit dem ausgewählten und erstellt die Visualisierung. Gibt es einen Fehler,wird die Funktion loading_failed aufgerufen und eine Warnung angezeigt.
+Wenn ein Bild angeklick oder hochgeladen wird, wird die Funktion changeImage() mit dem Parameter url aufgerufen. Die Funktion setzt zuerst das Ladeicon auf der rechten Seite auf aktiv. Falls die Klassifikation l&auml;nger dauert, bekommt der Nutzende so Feedback, dass der Input angekommen ist. Das anf&auml;ngliche Kameraicon in der Mitte vom grauen Kasten links wird unsichtbar gestellt, da der Nutzer nun gesehen hat, an welche Stelle er ein Bild per Drag and Drop hineinziehen kann. Dann wird das Bild mit classify klassifiziert und die Ergebnisse werden in einem Promise "results" gespeichert. War das erfolgreich, wird die funktion loading_successfull aufgerufen. Diese Funktion ersetzt das Bild links mit dem ausgew&auml;hlten und erstellt die Visualisierung. Gibt es einen Fehler, wird die Funktion loading_failed aufgerufen und eine Warnung angezeigt.
 
 **changeImage**
 
@@ -132,12 +129,12 @@ Beim Upload der Datei wird dann nocheinmal im JS gepr&uuml;ft ob es sich um eine
     }
 
 
-### Resultate
+## Resultate
 
-Durch die Verwendung der ml5.js API und mit Hilfe des ml5 ImageClassification Tutorials war die Impementierung der Grundfunktionen relativ schnell gemacht. Viel Zeit in Anspruch genommen hat vor allem die Gestaltung im Bezug auf Nutzerfreundlichkeit und Responsiveness. 
-Dem Resultat k&ouml;nnte man weitere Funktionen hinzufügen. Beispielsweise die M&uuml;glichkeit dien Anzahl der gezeiten Klassifizierungsergebnisse selbst zu bestimmen. Im allgemeinen bin ich mit dem Resultat sehr zufrieden. Auch auf dem Smartphone lässt es sich gut nutzen und bietet sogar die M&ouml;glichkeit direkt ein Bild aufzunehmen und es anschlie&szlig;end Klassifizieren zu lassen. 
+Durch die Verwendung der ml5.js API und mithilfe des ml5 ImageClassification Tutorials war die Implementierung der Grundfunktionen relativ schnell gemacht. Viel Zeit in Anspruch genommen hat vor allem die Gestaltung im Bezug auf Nutzerfreundlichkeit und Responsiveness. 
+Dem Resultat k&ouml;nnte man weitere Funktionen hinzuf&uuml;gen. Beispielsweise die M&ouml;glichkeit dien Anzahl der gezeigten Klassifizierungsergebnisse selbst zu bestimmen. Im Allgemeinen bin ich mit dem Resultat sehr zufrieden. Auch auf dem Smartphone l&auml;sst es sich gut nutzen und bietet sogar die M&ouml;glichkeit, direkt ein Bild aufzunehmen und es anschlie&szlig;end Klassifizieren zu lassen. 
 
-### Quellen
+## Quellen
 
 - [ml5 ImageClassification Tutorial](https://learn.ml5js.org/#/tutorials/hello-ml5)
 - [p5 Referenzen](https://p5js.org/reference)
