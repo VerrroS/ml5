@@ -14,9 +14,13 @@ img {
     border: 0.5px solid lightgray;
 }
 
-#examples p {
-    margin-top: 1rem;
+#examples strong {
+    font-weight: bolder;
+    display: block;
+    text-align: center;
+    background-color: azure;
 }
+
 
 h1 a{
     font-size: 1.5rem;
@@ -186,6 +190,11 @@ h1 {
     margin-left: 3rem;
 }
 
+@media screen and (max-width: 1200px){
+    #examples .row {
+        gap: 20px;
+    }
+}
 
 @media screen and (max-width: 991px) {
     #plot {
