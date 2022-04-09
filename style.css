@@ -181,6 +181,12 @@ h1 {
     display: block!important;
 }
 
+
+#documentation h3, #documentation h4, #documentation p, #documentation li, #documentation pre {
+    margin-left: 3rem;
+}
+
+
 @media screen and (max-width: 991px) {
     #plot {
         position: relative;
@@ -188,6 +194,9 @@ h1 {
     }
     #classifier-helper, #examples-helper{
         width: 300px;
+    }
+    #documentation h3, #documentation h4, #documentation p, #documentation li, #documentation pre {
+        margin-left: 0;
     }
 }
 
@@ -208,4 +217,3 @@ h1 {
         grid-template-columns: none;
     }
 }
-    

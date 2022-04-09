@@ -14,27 +14,26 @@
 <body class="container mt-2 mb-2">
     
 
-
+<section id="documentation">
 <h1>Dokumentation   <a href="./">Zur&uuml;ck zum Bildklassifizierer</a><a href="https://github.com/VerrroS/ml5" id="github" target="_blank"><span class="iconify" data-icon="akar-icons:github-fill"></span></a></h1>
 <h2>Technische Dokumentation</h2>
 <p>F&uuml;r die Umsetzung der Aufgabe habe ich folgende Tools verwendet:</p>
 <ul>
 <li>
 <p><strong><a href="https://ml5js.org/">ml5.js</a></strong></p>
-<p>Ml5.js ist eine High Level API zum TensorFlow Deep Learning Model (TensorFlow.js MobileNetV2)[https://github.com/tensorflow/tfjs-models/tree/master/mobilenet]. Ich habe ml5 genutz um die Kommunikation zum Modell einfach und Ã¼bersichtlich zu halten.</p>
+<p>Ml5.js ist eine High Level API zum TensorFlow Deep Learning Model (TensorFlow.js MobileNetV2)[https://github.com/tensorflow/tfjs-models/tree/master/mobilenet]. Ich habe ml5 genutz um die Kommunikation zum Modell einfach und &uuml;bersichtlich zu halten.</p>
 </li>
 <li>
 <p><strong><a href="https://getbootstrap.com/">Bootstrap</a></strong></p>
-<p>Bootstrap ist eine CSS Library, die es erleichtert Websites responsive zu gestalten. </p>
+<p>Bootstrap ist eine CSS Library, die es erleichtert, Websites responsive zu gestalten. </p>
 </li>
 </ul>
 <h2>Fachliche Dokumentation</h2>
 <h3><strong>Ansatz</strong></h3>
-<p>Um eine schnelle und leichtgewichtige L&ouml;sung zu erstellen habe ich mich dazu entschieden die Klassifikation auf 
-einer statischen WebPage zu implementieren. Ich nutze dabei kein Framework sondern schreibe nur HTML, CSS und JavaScript.</p>
-<h4>Visualisieren</h4>
-<p>Da mir der Look und die Handhabung von Frameworks wie Plotly nicht gef&auml;llt und in diesem Falle eine visualisierung der Ergebnisse 
-mit CSS und Javascript einfach m&ouml;glich ist, habe ich mich gegen ein Framework entschieden. Mit Css habe ich die volle 
+<p>Um eine schnelle und leichtgewichtige L&ouml;sung zu erstellen, habe ich mich dazu entschieden, die Klassifikation auf 
+einer statischen Webpage zu implementieren. Ich nutze dabei kein Framework, sondern schreibe nur HTML, CSS und JavaScript.
+Da mir der Look und die Handhabung von Frameworks wie Plotly nicht gef&auml;llt und in diesem Falle eine Visualisierung der Ergebnisse 
+mit CSS und Javascript einfach m&ouml;glich ist, habe ich mich gegen ein Framework entschieden. Mit CSS habe ich die volle 
 Kontrolle &uuml;ber den Look und kann die Seite auch f&uuml;r mobile Ger&auml;te anpassen.</p>
 <h3><strong>Logik</strong></h3>
 <h4>Klassifikation mit ml5</h4>
@@ -52,7 +51,7 @@ classifier.then(loadClassifier, loadClassifier_failed);
     alert("Classifier failed to load, please try again. Error: " + error);
 }
 </code></pre>
-<p>Wenn ein Bild angeclick oder hochgeladen wird, wird die Funktion changeImage() mit dem Parameter url aufgerufen. Die Funktion setzt zuerst das Ladeicon auf der rechten Seite auf aktiv. Falls die Klassifikation lÃ¤nger dauert, bekommt der Nutzende so Feedback, dass der Input angekommen ist. Das anf&auml;ngliche Kamera Icon in der Mitte vom grauen Kasten links wird unsichtbar gestellt, da der Nutzer nun gesehen hat, an welche Stelle er ein Bild per Drag and Drop hineinziehen kann. Dann wird das Bild mit classify klassifiziert und die Ergebnisse werden in einem Promise "results" gespeichert. War das erfolgreich wird die funktion loading_successfull aufgerufen. Diese Funktion ersetzt das Bild links mit dem ausgewÃ¤hlten und erstellt die Visualisierung. Gibt es einen Fehler,wird die Funktion loading_failed aufgerufen und eine Warnung angezeigt.</p>
+<p>Wenn ein Bild angeklick oder hochgeladen wird, wird die Funktion changeImage() mit dem Parameter url aufgerufen. Die Funktion setzt zuerst das Ladeicon auf der rechten Seite auf aktiv. Falls die Klassifikation l&auml;nger dauert, bekommt der Nutzende so Feedback, dass der Input angekommen ist. Das anf&auml;ngliche Kameraicon in der Mitte vom grauen Kasten links wird unsichtbar gestellt, da der Nutzer nun gesehen hat, an welche Stelle er ein Bild per Drag and Drop hineinziehen kann. Dann wird das Bild mit classify klassifiziert und die Ergebnisse werden in einem Promise "results" gespeichert. War das erfolgreich, wird die funktion loading_successfull aufgerufen. Diese Funktion ersetzt das Bild links mit dem ausgew&auml;hlten und erstellt die Visualisierung. Gibt es einen Fehler, wird die Funktion loading_failed aufgerufen und eine Warnung angezeigt.</p>
 <p><strong>changeImage</strong></p>
 <pre><code>function changeImage(url) {
     displayElement("toggle",loader, plot);
@@ -124,16 +123,17 @@ plot.appendChild(bar_parent);
     alert("Please upload an image");
 }
 </code></pre>
-<h3>Resultate</h3>
-<p>Durch die Verwendung der ml5.js API und mit Hilfe des ml5 ImageClassification Tutorials war die Impementierung der Grundfunktionen relativ schnell gemacht. Viel Zeit in Anspruch genommen hat vor allem die Gestaltung im Bezug auf Nutzerfreundlichkeit und Responsiveness. 
-Dem Resultat k&ouml;nnte man weitere Funktionen hinzufÃ¼gen. Beispielsweise die M&uuml;glichkeit dien Anzahl der gezeiten Klassifizierungsergebnisse selbst zu bestimmen. Im allgemeinen bin ich mit dem Resultat sehr zufrieden. Auch auf dem Smartphone lÃ¤sst es sich gut nutzen und bietet sogar die M&ouml;glichkeit direkt ein Bild aufzunehmen und es anschlie&szlig;end Klassifizieren zu lassen. </p>
-<h3>Quellen</h3>
+<h2>Resultate</h2>
+<p>Durch die Verwendung der ml5.js API und mithilfe des ml5 ImageClassification Tutorials war die Implementierung der Grundfunktionen relativ schnell gemacht. Viel Zeit in Anspruch genommen hat vor allem die Gestaltung im Bezug auf Nutzerfreundlichkeit und Responsiveness. 
+Dem Resultat k&ouml;nnte man weitere Funktionen hinzuf&uuml;gen. Beispielsweise die M&ouml;glichkeit dien Anzahl der gezeigten Klassifizierungsergebnisse selbst zu bestimmen. Im Allgemeinen bin ich mit dem Resultat sehr zufrieden. Auch auf dem Smartphone l&auml;sst es sich gut nutzen und bietet sogar die M&ouml;glichkeit, direkt ein Bild aufzunehmen und es anschlie&szlig;end Klassifizieren zu lassen. </p>
+<h2>Quellen</h2>
 <ul>
 <li><a href="https://learn.ml5js.org/#/tutorials/hello-ml5">ml5 ImageClassification Tutorial</a></li>
 <li><a href="https://p5js.org/reference">p5 Referenzen</a></li>
 <li><a href="https://stackoverflow.com/questions/4817029/whats-the-best-way-to-detect-a-touch-screen-device-using-javascript">Stackoverflow - Touchscreen Detection</a></li>
 <li><a href="https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/">Smashingmagazine- Darg and Drop File</a></li>
 </ul>
+</section>
 
 
 </body>
