@@ -196,16 +196,16 @@ h1 {
         height: 400px;
     }
     h1 a{
-        font-size: 1rem;
+        font-size: .75rem!important;
     }
     h1 {
-        font-size: large;
+        font-size: 1.2rem!important;
     }
     #github {
-        font-size: 1.5rem;
+        font-size: 1.5rem!important;
     }
     .exampleimages {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: none;
     }
 }
     
