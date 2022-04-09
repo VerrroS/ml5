@@ -8,12 +8,13 @@ const exampleimages = [
   {url: 'images/handshake.jpg', prediction: false},
   {url: 'images/clouds.png', prediction: false}
   ];
-  
+
 const image_active = document.getElementById('image_active');
 const inmage_input = document.getElementById('image_input');
 const plot = document.getElementById("plot");
 const helpIcon = document.getElementsByClassName("help-icon");
 const img_icon = document.getElementById("img_icon");
+const intro = document.getElementById("intro");
 const helper_classifier = plot.getElementsByClassName("help-icon")[0];
 const helper_examples = plot.getElementsByClassName("help-icon")[0];
 let classifier = ml5.imageClassifier('MobileNet');

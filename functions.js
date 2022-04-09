@@ -68,6 +68,7 @@ function loading_successfull(results) {
         createBarCart(percent, element["label"]);
     });
     helper_classifier.style.display = "block";
+    displayElement("none", intro);
     displayElement("toggle", loader, plot);
 }
 
