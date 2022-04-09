@@ -7,19 +7,18 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="animations.css"> 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
   <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
   <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
 </head>
 
-<body class="container">
+<body class="container mt-2 mb-2">
     
 
-<h1>Bildklassifikation mit ml5</h1>
+<h1>Bildklassifikation mit ml5   <a href="documentation.html">Dokumentation</a></h1>
 <section class="row">
   <div class="col-lg-7">
     <div id="image_active" >
-      <div  id="img_icon">
+      <div  id="img_icon" class="active">
         <span class="iconify" data-icon="bi:image-fill"></span>
         <p>Drag Image here</p>
       </div>
@@ -36,8 +35,8 @@
           <a href="https://github.com/tensorflow/tfjs-models/tree/master/mobilenet">TensorFlow.js MobileNetV2</a>.
           Das Modell trifft Vorhersagen darüber, was auf dem Bild zu sehen ist. Diese Vorhersagen wurden aus einem 
           Datensatz von 50k Bildern vom Modell erlernt. Es werden die drei Erebnisse mit den höchsten Konfidenzwerten angezeigt.
+          <a href="https://learn.ml5js.org/#/reference/image-classifier?id=model-and-data-provenance">Mehr Infos</a>
         </div>
-        
       </div>
     </div>
   </div>
@@ -48,25 +47,32 @@
     <div class="help-icon" data-key="examples-helper">
       <span class="iconify" data-icon="bx:help-circle"></span>
       <div id="examples-helper">
-        Klicken sie auf die Beispielbilder um sie Klassfizieren zu lassen. Auf der rechten Seite können sie die Klassifikation sehen.
+        Klicken sie auf die Beispielbilder um diese klassfizieren zu lassen. Auf der rechten Seite können sie die Klassifikation anschließend sehen.
         Die Beispielbilder wurden so gewählt, dass die Hälfte von ihnen richtig und die andere Häfte falsch von dem Deep Learning Model
-        klassifiziert wurden.
+        klassifiziert wurden. Es können sowohl Fotos als auch Zeichnungen oder Grafiken klassifiziert werden.
       </div>
     </div>
   </h3>
-  <div id="exampleimages"></div>
+  <div class="row">
+    <div class="col-xl-6">
+      <p>Richtige Klassifikation</p>
+      <div id="exampleimages_right" class="exampleimages">
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <p>Falsche Klassifikation</p>
+      <div id="exampleimages_wrong" class="exampleimages">
+      </div>
+    </div>
+</div>
 </section>
 
-<footer class="mt-3">
-  <a href="documentation.html">Dokumentation</a>
-</footer>
 
 
-<script src="classifier.js"></script>
 
 </body>
 
-
 <script src="functions.js"></script>
 <script src="main.js"></script>
+
 </html>

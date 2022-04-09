@@ -1,71 +1,94 @@
 
-# Dokumentation<a href="https://github.com/VerrroS/ml5" id="github" target="_blank"><span class="iconify" data-icon="akar-icons:github-fill"></span></a>
+# Dokumentation   <a href="./">Zur&uuml;ck zum Bildklassifizierer</a><a href="https://github.com/VerrroS/ml5" id="github" target="_blank"><span class="iconify" data-icon="akar-icons:github-fill"></span></a>
 
 ## Technische Dokumentation 
-Für die Umsetzung der Aufgabe habe ich folgende Tools verwendet:
-
-- **[p5.js](https://p5js.org/)**
-
-    p5.js habe ich verwendet um die Bilder zu laden und zu verarbeiten
+F&uuml;r die Umsetzung der Aufgabe habe ich folgende Tools verwendet:
 
 - **[ml5.js](https://ml5js.org/)**
 
-    ml5 habe ich verwendet um die Bilder zu verarbeiten
+    Ml5.js ist eine High Level API zum TensorFlow Deep Learning Model (TensorFlow.js MobileNetV2)[https://github.com/tensorflow/tfjs-models/tree/master/mobilenet]. Ich habe ml5 genutz um die Kommunikation zum Modell einfach und übersichtlich zu halten.
 
 - **[Bootstrap](https://getbootstrap.com/)**
 
-    Bootstrap habe ich verwendet um das User Interface zu gestalten
+    Bootstrap ist eine CSS Library, die es erleichtert Websites responsive zu gestalten. 
 
 ## Fachliche Dokumentation
-### Ansatz
-Um eine schnelle und leichtgewichtige Lösung zu erstellen habe ich mich dazu entschieden die Klassifikation auf 
+
+### **Ansatz**
+Um eine schnelle und leichtgewichtige L&ouml;sung zu erstellen habe ich mich dazu entschieden die Klassifikation auf 
 einer statischen WebPage zu implementieren. Ich nutze dabei kein Framework sondern schreibe nur HTML, CSS und JavaScript.
 
-**Visualisieren**
+#### Visualisieren
 
-Da mir der Look und die Handhabung von Frameworks wie Plotly nicht gefällt und in diesem Falle eine visualisierung der Ergebnisse 
-mit CSS und Javascript einfach möglich ist, habe ich mich gegen ein Framework entschieden. Mit Css habe ich die volle 
-Kontrolle über den Look und kann die Seite auch für mobile Geräte anpassen.
+Da mir der Look und die Handhabung von Frameworks wie Plotly nicht gef&auml;llt und in diesem Falle eine visualisierung der Ergebnisse 
+mit CSS und Javascript einfach m&ouml;glich ist, habe ich mich gegen ein Framework entschieden. Mit Css habe ich die volle 
+Kontrolle &uuml;ber den Look und kann die Seite auch f&uuml;r mobile Ger&auml;te anpassen.
 
 
-### Logik   
+### **Logik**  
 
-**Klassifikation mit ml5**
+#### Klassifikation mit ml5
 
-Zuerst wird der ml5 Classifier mit preload geladen
+Der ml5 classifier wird beim Laden der Seite definiert und dann aufgerufen
 
-    function preload() {
     let classifier = ml5.imageClassifier('MobileNet');
+    classifier.then(loadClassifier, loadClassifier_failed);
+
+**loadClassifier**
+
+    function loadClassifier(result){
+        classifier = result;
     }
 
-Um p5 zu starten wird die funktion setup aufgerufen. Da ich kein Canvas nutze um das Bild anzuzeigen rufe ich die Funktion noCanvas(); darin auf
 
-    function setup(){
-    noCanvas();
+**loadClassifier_failed**
+
+    function loadClassifier_failed(error) {
+        alert("Classifier failed to load, please try again. Error: " + error);
     }
 
-Wenn ein Bild angeclick oder hochgeladen wird, wird die Funktion changeImage() mit dem Parameter url aufgerufen. Die Funktion setzt zuerst das Ladeicon auf der rechten Seite auf aktiv. So bekommt der Nuetzer das Feedback, dass der Input angekommen ist. Das anfängliche Kamera Icon in der Mitte vom grauen Kasten links wird unsichtbar gestellt, da der Nutzer nun gesehen hat, an welche Stelle er ein Bild per Drak and Drop hineinziehen kann. Mit loadImage wird nun das Bild and ml5 weitergegeben. Ist es erfolgreich geladen worden wird es links angezeigt. Gibt es beim laden einen Fehler, wird eine Warnung angezeigt.
+Wenn ein Bild angeclick oder hochgeladen wird, wird die Funktion changeImage() mit dem Parameter url aufgerufen. Die Funktion setzt zuerst das Ladeicon auf der rechten Seite auf aktiv. Falls die Klassifikation länger dauert, bekommt der Nutzende so Feedback, dass der Input angekommen ist. Das anf&auml;ngliche Kamera Icon in der Mitte vom grauen Kasten links wird unsichtbar gestellt, da der Nutzer nun gesehen hat, an welche Stelle er ein Bild per Drag and Drop hineinziehen kann. Dann wird das Bild mit classify klassifiziert und die Ergebnisse werden in einem Promise "results" gespeichert. War das erfolgreich wird die funktion loading_successfull aufgerufen. Diese Funktion ersetzt das Bild links mit dem ausgewählten und erstellt die Visualisierung. Gibt es einen Fehler,wird die Funktion loading_failed aufgerufen und eine Warnung angezeigt.
 
-    function changeImage(url){
-    toggleLoader();
-    img_icon.style.display = "none";
-    img = loadImage(url, () => loading_sucessful(url), () => loading_failed());
+**changeImage**
+
+    function changeImage(url) {
+        displayElement("toggle",loader, plot);
+        displayElement("none", img_icon);
+        img = document.createElement("img");
+        img.src = url;
+        results = classifier.classify(img);
+        results.then(loading_successfull, loading_failed);
+        if (results) {
+            image_active.style.backgroundImage = `url(${url})`;
+        } else {
+            image_active.style.backgroundImage = null;
+            displayElement("block", img_icon);
+        }
     }
 
-**Visualisierung mit JS und CSS**
+**loading_successfull**
 
-Ist die Klassifikation abgeschlossen oder ein Fehler tritt auf wird die Funktion gotResult aufgerufen. Bei einem Fehler gibt es eine Warnung mit der entsprechenden Fehlermeldung. Für die Visualisierung der Ergebnisse habe ich die Funktion createBarCart() erstellt. Diese wird für jedes Ergebnis mit den Parametern percent und lable_txt aufgerufen. 
+    function loading_successfull(results) {
+        results.forEach(element => {
+            percent = element["confidence"] * 100;
+            createBarCart(percent, element["label"]);
+        });
+        helper_classifier.style.display = "block";
+        displayElement("toggle", loader, plot);
+    }
 
-    function gotResult(error, results) {
-    if (error) {
-        console.error(error);
-        alert("Error: " + error);
+**loading_successfull**
+
+    function loading_failed(error) {
+        alert("Classification failed, please try another image Error: " + error);
+        displayElement("toggle",loader, plot);
     }
-    results.forEach(element => {
-    percent = element["confidence"] * 100;
-    createBarCart(percent, element["label"]);
-    });
-    }
+
+#### Visualisierung mit JS und CSS
+
+F&uuml;r die Visualisierung der Ergebnisse habe ich die Funktion createBarCart() erstellt. Diese wird f&uuml;r jedes Ergebnis mit den Parametern percent und lable_txt aufgerufen. 
+
+**createBarChart**
 
     function createBarCart(percent, lable_txt){
     cleanUpBars();
@@ -79,7 +102,9 @@ Ist die Klassifikation abgeschlossen oder ein Fehler tritt auf wird die Funktion
     plot.appendChild(bar_parent);
     }
 
-In der Funktion createBar() wird nun die Länge der Bar im style property definiert.
+In der Funktion createBar() wird nun die L&auml;nge der Bar im style property definiert.
+
+**createBar**
 
     function createBar(isChild = false){
         var newdiv = document.createElement("div");
@@ -92,13 +117,13 @@ In der Funktion createBar() wird nun die Länge der Bar im style property defini
         return newdiv;
     }
 
-**Fehlerbehandlung**
+#### Fehlerbehandlung
 
-Der Upload wird an verschiedenen Stellen auf das passende Format geprüft. Bei der Verwendung des Input Buttons werden nur die Dateiformate png und jpg akzeptiert.
+Der Upload wird an verschiedenen Stellen auf das passende Format gepr&uuml;ft. Bei der Verwendung des Input Buttons werden nur die Dateiformate png und jpg akzeptiert.
 
     <input class="mt-2" id="image_input" type='file' accept="image/png, image/jpg"/>
 
-Beim Upload der Datei wird dann nocheinmal im JS geprüft ob es sich um eine Bilddatei handelt.
+Beim Upload der Datei wird dann nocheinmal im JS gepr&uuml;ft ob es sich um eine Bilddatei handelt.
 
     if (uploaded_image.startsWith("data:image")){
         changeImage(uploaded_image);
@@ -106,11 +131,15 @@ Beim Upload der Datei wird dann nocheinmal im JS geprüft ob es sich um eine Bil
         alert("Please upload an image");
     }
 
+
 ### Resultate
 
-
+Durch die Verwendung der ml5.js API und mit Hilfe des ml5 ImageClassification Tutorials war die Impementierung der Grundfunktionen relativ schnell gemacht. Viel Zeit in Anspruch genommen hat vor allem die Gestaltung im Bezug auf Nutzerfreundlichkeit und Responsiveness. 
+Dem Resultat k&ouml;nnte man weitere Funktionen hinzufügen. Beispielsweise die M&uuml;glichkeit dien Anzahl der gezeiten Klassifizierungsergebnisse selbst zu bestimmen. Im allgemeinen bin ich mit dem Resultat sehr zufrieden. Auch auf dem Smartphone lässt es sich gut nutzen und bietet sogar die M&ouml;glichkeit direkt ein Bild aufzunehmen und es anschlie&szlig;end Klassifizieren zu lassen. 
 
 ### Quellen
 
-- [ml5 Tutorial](https://learn.ml5js.org/#/tutorials/hello-ml5)
+- [ml5 ImageClassification Tutorial](https://learn.ml5js.org/#/tutorials/hello-ml5)
 - [p5 Referenzen](https://p5js.org/reference)
+- [Stackoverflow - Touchscreen Detection](https://stackoverflow.com/questions/4817029/whats-the-best-way-to-detect-a-touch-screen-device-using-javascript)
+- [Smashingmagazine- Darg and Drop File](https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/)
