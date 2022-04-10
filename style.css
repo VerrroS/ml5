@@ -194,6 +194,7 @@ h1 {
     margin-left: 3rem;
 }
 
+
 @media screen and (max-width: 1200px){
     #examples .row {
         gap: 20px;
@@ -227,6 +228,7 @@ h1 {
         font-size: 1.5rem!important;
     }
     .exampleimages {
-        grid-template-columns: none;
+        grid-template-columns: 200px 200px 200px;
+        overflow-x: scroll;
     }
 }

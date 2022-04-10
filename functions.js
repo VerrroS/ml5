@@ -67,7 +67,7 @@ function loading_successfull(results) {
         percent = element["confidence"] * 100;
         createBarCart(percent, element["label"]);
     });
-    helper_classifier.style.display = "block";
+    displayElement("block", helper_classifier);
     displayElement("none", intro);
     displayElement("toggle", loader, plot);
 }
