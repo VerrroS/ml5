@@ -131,6 +131,7 @@ Beim Upload der Datei wird dann nocheinmal im JS gepr&uuml;ft ob es sich um eine
 
 ## Resultate
 
+### Resultate der Aufgabe
 <div class="row">
 <p class="col-lg-4">
 Durch die Verwendung der ml5.js API und mithilfe des ml5 ImageClassification Tutorials war die Implementierung der Grundfunktionen relativ schnell gemacht. Viel Zeit in Anspruch genommen hat vor allem die Gestaltung im Bezug auf Nutzerfreundlichkeit und Responsiveness. 
@@ -139,6 +140,11 @@ Dem Resultat k&ouml;nnte man weitere Funktionen hinzuf&uuml;gen. Beispielsweise 
 <img class="col-xl-3 col-lg-6" src="images/screenshot.PNG" alt="mobile screenshot">
 </img>
 </div>
+
+### Resultate der Klassifizierung
+
+Der ml5 Bildklassifizierer kann vor allem gut ausgeleuchtete Bilder mit einem klaren Objekt im Vordergrund richtig erkennen. Dabei spielt es keine Rolle, ob es sich um Fotos, Zeichnungen oder Grafiken handelt. Was nicht so gut funktioniert, sind Bilder mit &Uuml;berlagerungen oder mehrern Motiven. Auch bei Bildern, die Menschen zeigen, werden meistens falsche Ergebnisse ausgegeben. Wohingegen Tiermotive besonders gut funktionieren. Das hat sehr wahrscheinlich mit den Trainingsdaten des Modells zutun. 
+
 ## Quellen
 
 - [ml5 ImageClassification Tutorial](https://learn.ml5js.org/#/tutorials/hello-ml5)
