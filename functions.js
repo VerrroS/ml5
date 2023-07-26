@@ -116,7 +116,9 @@ function createBarCart(percent, lable_txt) {
 }
 
 function loadClassifier(result){
+    console.log("Classifier loaded");
     classifier = result;
+    createExamples();
 }
 
 function loadClassifier_failed(error) {

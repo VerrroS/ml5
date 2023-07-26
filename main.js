@@ -21,8 +21,6 @@ let classifier = ml5.imageClassifier('MobileNet');
 
 classifier.then(loadClassifier, loadClassifier_failed);
 
-createExamples();
-
 
 inmage_input.addEventListener("change", uploadFile, false);
 image_active.addEventListener("dragover", function(ev) {ev.preventDefault(), this.classList.add('highlight')});
